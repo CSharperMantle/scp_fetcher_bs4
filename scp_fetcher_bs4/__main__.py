@@ -1,15 +1,17 @@
 import requests
+import requests.exceptions as req_exceptions
 import argparse
 import logging
 from scp_fetcher_bs4.scp_info import SCPInfo, SCPParsingError
 
 
-_HUMAN_EXCEPTION_OUTPUT_TEMPLATE = """
-Exception caught: {0}
+_HUMAN_PARSING_EX_OUTPUT_TEMPLATE = """Exception caught: {0}! Is the format correct?
 """
 
-_HUMAN_ACS_OUTPUT_TEMPLATE = """
-Information about SCP-{0}:
+_HUMAN_REQUEST_EX_OUTPUT_TEMPLATE = """Exception caught: {0}! Is the URL reachable?
+"""
+
+_HUMAN_ACS_OUTPUT_TEMPLATE = """Information about SCP-{0}:
 \tClearance Level: {1}/{2}
 \tContainment Class: {3}
 \tSecondary Class: {4}
@@ -17,8 +19,7 @@ Information about SCP-{0}:
 \tRisk Class: {6}
 """
 
-_HUMAN_NON_ACS_OUTPUT_TEMPLATE = """
-Information about SCP-{0}:
+_HUMAN_NON_ACS_OUTPUT_TEMPLATE = """Information about SCP-{0}:
 \tObject Class: {1}
 """
 
@@ -46,15 +47,27 @@ def main():
         logging.basicConfig(level=logging.ERROR)
 
     for each_url in url_list:
+
         logging.info("fetching {0}".format(each_url))
-        req = requests.get(each_url)
+        try:
+            req = requests.get(each_url)
+        except req_exceptions.RequestException as ex:
+            if not porcelain_run:
+                logging.error(_HUMAN_REQUEST_EX_OUTPUT_TEMPLATE.format(ex))
+                break
+            else:
+                raise
         text = req.text
         req.close()
+
         try:
             scp_info = SCPInfo.from_html_page(text)
         except SCPParsingError as ex:
-            logging.error(_HUMAN_EXCEPTION_OUTPUT_TEMPLATE.format(ex))
-            break
+            if not porcelain_run:
+                logging.error(_HUMAN_PARSING_EX_OUTPUT_TEMPLATE.format(ex))
+                break
+            else:
+                raise
         if not porcelain_run:
             if scp_info.is_acs_present:
                 clearance = scp_info.clearance
