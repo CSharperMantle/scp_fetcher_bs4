@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 
-setup(name='scp-fetcher-bs4',
+setup(name='scp_fetcher_bs4',
       version='0.0.2',
       author='CSharperMantle',
       author_email='mantlejonse@gmail.com',
