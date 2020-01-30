@@ -44,8 +44,8 @@ class SCPInfo:
 
     def __repr__(self):
         return "<SCPInfo {0} {1} {2} {3} {4} {5} {6}>".format(self.id, self.clearance, self.object_class,
-                                                             self.is_acs_present, self.secondary_class, self.disruption,
-                                                             self.risk)
+                                                              self.is_acs_present, self.secondary_class,
+                                                              self.disruption, self.risk)
 
     @classmethod
     def from_html_page(cls, html_str, *, silent_error=False):

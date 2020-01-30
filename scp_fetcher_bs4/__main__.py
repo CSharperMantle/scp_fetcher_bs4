@@ -1,7 +1,7 @@
 import requests
 import argparse
 import logging
-from scp_info import SCPInfo, SCPParsingError
+from scp_fetcher_bs4.scp_info import SCPInfo, SCPParsingError
 
 
 _HUMAN_EXCEPTION_OUTPUT_TEMPLATE = """
