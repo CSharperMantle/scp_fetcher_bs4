@@ -2,7 +2,7 @@ import requests
 import requests.exceptions as req_exceptions
 import argparse
 import logging
-from scp_fetcher_bs4.scp_info import SCPInfo, SCPParsingError
+from scp_fetcher_bs4.scp_info import *
 
 
 _HUMAN_PARSING_EX_OUTPUT_TEMPLATE = """Exception caught: {0}! Is the format correct?
@@ -19,10 +19,14 @@ _HUMAN_ACS_OUTPUT_TEMPLATE = """Information about SCP-{0}:
 \tRisk Class: {6}
 """
 
-_HUMAN_NON_ACS_OUTPUT_TEMPLATE = """Information about SCP-{0}:
+_HUMAN_CLASSICAL_OUTPUT_TEMPLATE = """Information about SCP-{0}:
 \tObject Class: {1}
 """
 
+_HUMAN_SEMI_CLASSICAL_OUTPUT_TEMPLATE = """Information about SCP-{0}:
+\tClearance Level: {1}
+\tObject Class: {2}
+"""
 
 def main():
     parser = argparse.ArgumentParser(description='Fetch SCP-related information from a given SCP Wiki page')
@@ -61,7 +65,7 @@ def main():
         req.close()
 
         try:
-            scp_info = SCPInfo.from_html_page(text)
+            scp_info = SCPInfo.from_html_page(text, silent_error=False)
         except SCPParsingError as ex:
             if not porcelain_run:
                 logging.error(_HUMAN_PARSING_EX_OUTPUT_TEMPLATE.format(ex))
@@ -69,7 +73,8 @@ def main():
             else:
                 raise
         if not porcelain_run:
-            if scp_info.is_acs_present:
+            page_type = scp_info.page_type
+            if page_type == PAGE_TYPE_ANOM:
                 clearance = scp_info.clearance
                 clearance_text = "unknown"
                 if clearance == '1':
@@ -86,8 +91,11 @@ def main():
                     clearance_text = "cosmetic top secret"
                 print(_HUMAN_ACS_OUTPUT_TEMPLATE.format(scp_info.id, clearance, clearance_text, scp_info.object_class,
                                                         scp_info.secondary_class, scp_info.disruption, scp_info.risk))
-            else:
-                print(_HUMAN_NON_ACS_OUTPUT_TEMPLATE.format(scp_info.id, scp_info.object_class))
+            elif page_type == PAGE_TYPE_CLASSICAL:
+                print(_HUMAN_CLASSICAL_OUTPUT_TEMPLATE.format(scp_info.id, scp_info.object_class))
+            elif page_type == PAGE_TYPE_SEMI_CLASSICAL:
+                print(_HUMAN_SEMI_CLASSICAL_OUTPUT_TEMPLATE.format(scp_info.id, scp_info.clearance,
+                                                                   scp_info.object_class))
         else:
             print(repr(scp_info))
 
