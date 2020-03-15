@@ -1,9 +1,10 @@
-import requests
-import requests.exceptions as req_exceptions
 import argparse
 import logging
-from scp_fetcher_bs4.scp_info import *
 
+import requests
+import requests.exceptions as req_exceptions
+
+from scp_fetcher_bs4.scp_info import *
 
 _HUMAN_PARSING_EX_OUTPUT_TEMPLATE = """Exception caught: {0}! Is the format correct?
 """
@@ -27,6 +28,7 @@ _HUMAN_SEMI_CLASSICAL_OUTPUT_TEMPLATE = """Information about SCP-{0}:
 \tClearance Level: {1}
 \tObject Class: {2}
 """
+
 
 def main():
     parser = argparse.ArgumentParser(description='Fetch SCP-related information from a given SCP Wiki page')
