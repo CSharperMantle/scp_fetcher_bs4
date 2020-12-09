@@ -146,3 +146,7 @@ E.g.: [SCP-4973](http://scp-wiki.wikidot.com/scp-4973)
 ```
 
 **Item # and Object Class support only, for now.**
+
+## TODO list
+* [ ] Finish implementing other types of SCPs
+* [ ] Switch to XPath or else to beautify the identification process
