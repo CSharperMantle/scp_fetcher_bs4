@@ -237,3 +237,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/ .
 ## Copyright notice on SCP Foundation-related content
 [The SCP Foundation Wiki](http://scp-wiki.wikidot.com) and contents are licensed under 
 a [Creative Commons Attribution-ShareAlike 3.0 Unported License](https://creativecommons.org/licenses/by-sa/3.0/).
+
+## TODO list
+* [ ] Finish implementing other types of SCPs
+* [ ] Switch to XPath or else to beautify the identification process
