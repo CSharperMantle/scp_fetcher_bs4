@@ -4,8 +4,8 @@
 Fetch information about _almost_ every SCP from SCP Wiki pages, as well as page source!
 
 ## Introduction
-`scp-fetcher-bs4` is a multi-purpose information gatherer for Wikidot-hosted SCP Foundation Wiki. Powered by `requests`,
-`bs4` and `selenium`, `scp-fetcher-bs4` can handle a large variety of SCPs and
+`scp_fetcher_bs4` is a multi-purpose information gatherer for Wikidot-hosted SCP Foundation Wiki. Powered by `requests`,
+`bs4` and `selenium`, `scp_fetcher_bs4` can handle a large variety of SCPs and
 
 ## Features
 * One-key SCP information fetcher
@@ -21,7 +21,7 @@ Webdrivers are needed to enable page source fetching. Please refer to
 [the Selenium docs](https://www.selenium.dev/documentation/en/selenium_installation/installing_webdriver_binaries/) for
 more information about installing webdrivers.
 
-Currently `scp-fetcher-bs4` supports 2 widely-adopted browsers: Chrome & Firefox.
+Currently `scp_fetcher_bs4` supports 2 widely-adopted browsers: Chrome & Firefox.
 
 ## Examples
 
@@ -59,6 +59,7 @@ if __name__ == '__main__':
 
 ### 2. Using CLI
 
+#### 2.1. Getting help
 ```text
 > python scp_fetcher_bs4 -h
 Fetch SCP-related information from a given SCP Wiki page
@@ -74,7 +75,10 @@ optional arguments:
                         fetch the page source with Selenium
   -d DRIVER, --driver DRIVER
                         webdriver used by Selenium
+```
 
+#### 2.2. Getting SCP information
+```text
 > python scp_fetcher_bs4 -u http://scp-wiki.wikidot.com/scp-173
 Information about SCP-173:
         Object Class: euclid
@@ -110,7 +114,10 @@ Information about SCP-4064:
 > python scp_fetcher_bs4 -u http://www.github.com
 ERROR:root:Exception caught: no object id definition! Is the page an SCP with correct format?
 
+```
 
+#### 2.3. Getting page source
+```text
 > python scp_fetcher_bs4 -u http://scp-wiki-cn.wikidot.com/statement-on-disabling-offset -s -d firefox
 Please login in the newly opened browser window. This app will NOT record any of your passwords, username and so on. Press ENTER when finished.>
 
@@ -220,20 +227,28 @@ E.g.: [SCP-4973](http://scp-wiki.wikidot.com/scp-4973)
 
 ## License
 ```text
-Copyright (C) 2020-2021 Rong "Mantle" Bao (CSharperMantle)
+The MIT License (MIT)
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+Copyright (c) 2020-2021 Rong "Mantle" Bao (CSharperMantle)
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see http://www.gnu.org/licenses/ .
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 ```
 
 ## Copyright notice on SCP Foundation-related content

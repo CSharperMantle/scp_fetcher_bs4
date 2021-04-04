@@ -8,7 +8,7 @@ setup(name='scp_fetcher_bs4',
       url='https://github.com/CSharperMantle/scp_fetcher_bs4',
       description='fetch SCP-related information from a given SCP Wiki page',
       long_description='see README.md',
-      license='GPL-3.0-or-later',
+      license='MIT',
       install_requires=[
             'beautifulsoup4==4.8.2',
             'certifi==2019.11.28',
