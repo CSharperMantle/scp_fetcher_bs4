@@ -171,24 +171,21 @@ def main():
             text = req.text
             scp_info = SCPInfo.from_html_page(text, silent_error=False)
             req.close()
-        except req_exceptions.RequestException as ex:
-            if not porcelain_run:
-                logging.error(_HUMAN_REQUEST_EX_OUTPUT_TEMPLATE.format(ex))
-                if force_run:
-                    continue
-                else:
-                    break
-            else:
+        except Exception as ex:
+            if porcelain_run:
                 raise
-        except SCPParsingError as ex:
-            if not porcelain_run:
+
+            if isinstance(ex, SCPParsingError):
                 logging.error(_HUMAN_PARSING_EX_OUTPUT_TEMPLATE.format(ex))
-                if force_run:
-                    continue
-                else:
-                    break
+            elif isinstance(ex, req_exceptions.RequestException):
+                logging.error(_HUMAN_REQUEST_EX_OUTPUT_TEMPLATE.format(ex))
             else:
-                raise
+                logging.exception(ex)
+
+            if force_run:
+                continue
+            else:
+                break
 
         if not porcelain_run:
             page_type = scp_info.page_type
