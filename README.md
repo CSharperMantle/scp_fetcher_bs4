@@ -1,4 +1,6 @@
 # scp_fetcher_bs4
+[![Maintainability](https://api.codeclimate.com/v1/badges/a2baad5510e4985f4929/maintainability)](https://codeclimate.com/github/CSharperMantle/scp_fetcher_bs4/maintainability)
+
 Fetch information about _almost_ every SCP from SCP Wiki pages, as well as page source!
 
 ## Introduction
