@@ -28,7 +28,8 @@ class SCPParsingError(Exception):
 
 
 class SCPInfo:
-    """Main class which contains SCP information.
+    """
+    Main class which contains SCP information.
 
     """
 
@@ -41,7 +42,9 @@ class SCPInfo:
 
     @classmethod
     def from_html_page(cls, html_str, *, silent_error=False):
-        """Create a SCPInfo object from a HTML page.
+        """
+        Create a SCPInfo object from a HTML page.
+
         :param html_str: A string contains the page from SCP Wiki which has
          the description of the SCP.
         :param silent_error: A bool indicating whether to throw exceptions
