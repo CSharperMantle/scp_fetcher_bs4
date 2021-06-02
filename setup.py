@@ -17,7 +17,7 @@ setup(name='scp_fetcher_bs4',
             'requests==2.22.0',
             'selenium==3.141.0',
             'soupsieve==1.9.5',
-            'urllib3==1.25.8'
+            'urllib3==1.26.5'
       ],
       include_package_data=True,
       packages=find_packages())
